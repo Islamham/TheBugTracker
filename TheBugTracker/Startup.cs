@@ -35,15 +35,11 @@ namespace TheBugTracker
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             //Changed to AddIdentity from AddDefaultIdentity
-            //AddIdentity registers the specified user and role types with the services
-            //but doesn’t bring in UI-related services and configurations found in default version so we add manually.
-            //Set the parameters as BTUser and IdentityRole:
-            //BTUser: Specifies the type to be used for users in the Identity system. It's your custom user class.
-            //IdentityRole: Specifies the type to be used for roles in the Identity system.
+            //Set the parameters as BTUser and IdentityRole
             //Will touch on IdentityRole later
             services.AddIdentity<BTUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                //Following two lines added:
+                //Since AddIdentity used, we must manually add the following lines
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
             services.AddControllersWithViews();
