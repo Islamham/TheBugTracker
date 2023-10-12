@@ -29,6 +29,7 @@ namespace TheBugTracker.Models
         [DisplayName("Team Member")]
         public string UserId { get; set; } //Foreign key: reference to primary key in user table 
 
+
         //Navigation Properties
         public virtual Ticket Ticket { get; set; } //will be obtained by TicketId
 
