@@ -10,6 +10,7 @@ namespace TheBugTracker.Models
 {
     public class TicketAttachment
     {
+        //Primary Key
         public int Id { get; set; }
 
         [DisplayName("Ticket")]

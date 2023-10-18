@@ -5,6 +5,7 @@ namespace TheBugTracker.Models
 {
     public class TicketComment
     {
+        //Primary Key
         public int Id { get; set; }
 
         [DisplayName("Member Comment")]
@@ -21,7 +22,6 @@ namespace TheBugTracker.Models
 
 
         //Navigation Properties
-
         public virtual Ticket Ticket { get; set; } //will be obtained by TicketId
 
         public virtual BTUser User { get; set; } //will be obtained by UserId

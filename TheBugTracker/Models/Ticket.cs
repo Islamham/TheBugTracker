@@ -60,16 +60,24 @@ namespace TheBugTracker.Models
         //Navigation Properties
         //Virtual enables Lazy Loading (opposite of Eager Loading)
         //This version of .NET doesn't require it, but kept for visibility 
-        public virtual Project Project { get; set; }
-        public virtual TicketType TicketType { get; set; }
-        public virtual TicketPriority TicketPriority { get; set; }
-        public virtual TicketStatus TicketStatus { get; set; }
-        public virtual BTUser OwnerUser { get; set; }
-        public virtual BTUser DeveloperUser { get; set; }
+        public virtual Project Project { get; set; } //obtained by ProjectId
+
+        public virtual TicketType TicketType { get; set; } //obtained by TicketTypeId
+
+        public virtual TicketPriority TicketPriority { get; set; } //obtained by TicketPriorityId
+
+        public virtual TicketStatus TicketStatus { get; set; } //obtained by TicketStatusId
+
+        public virtual BTUser OwnerUser { get; set; } //obtained by OwnerUserId
+
+        public virtual BTUser DeveloperUser { get; set; } //obtained by DeveloperUserId
 
         public virtual ICollection<TicketComment> Comments { get; set; } = new HashSet<TicketComment>();
-        public virtual ICollection<TicketAttachment> Attachments { get; set; } = new HashSet<TicketAttachment();
+
+        public virtual ICollection<TicketAttachment> Attachments { get; set; } = new HashSet<TicketAttachment>();
+
         public virtual ICollection<Notification> Notifications { get; set; } = new HashSet<Notification>();
+
         public virtual ICollection<TicketHistory> History { get; set; } = new HashSet<TicketHistory>();
     }
 }

@@ -9,7 +9,7 @@ namespace TheBugTracker.Models
 {
     public class Project
     {
-
+        //Primary Key
         public int Id { get; set; }
 
         [DisplayName("Company Id")]
@@ -51,10 +51,10 @@ namespace TheBugTracker.Models
 
 
         //Navigation Properties
-        public virtual Company Company { get; set; }
+        public virtual Company Company { get; set; } // obtained by CompanyId
 
-        public virtual ProjectPriority ProjectPriority { get; set; } 
-        
+        public virtual ProjectPriority ProjectPriority { get; set; } // obtained by ProjectPriorityId
+
         public virtual ICollection<BTUser> Members { get; set; } = new HashSet<BTUser>();
 
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();

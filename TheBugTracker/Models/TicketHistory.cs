@@ -6,6 +6,7 @@ namespace TheBugTracker.Models
 {
     public class TicketHistory
     {
+        //Primary Key
         public int Id { get; set; }
 
         [DisplayName("Ticket")]
