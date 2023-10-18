@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TheBugTracker.Models
 {
-    public class BTUser: IdentityUser
+    public class BTUser: IdentityUser //IdentityUser uses Guid type for primary key
     {
         //creating public properties of the class
 
