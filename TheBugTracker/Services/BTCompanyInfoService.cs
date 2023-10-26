@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Update;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,6 +36,16 @@ namespace TheBugTracker.Services
                                             .Include(p => p.Tickets)
                                                 .ThenInclude(t => t.Comments)
                                             .Include(p => p.Tickets)
+                                                .ThenInclude(t => t.Attachments)
+                                            .Include(p => p.Tickets)
+                                                .ThenInclude(t => t.History)
+                                            .Include(p => p.Tickets)
+                                                .ThenInclude(t => t.Notifications)
+                                            .Include(p => p.Tickets)
+                                                .ThenInclude(t => t.DeveloperUser)
+                                            .Include(p => p.Tickets)
+                                                .ThenInclude(t => t.OwnerUser)
+                                            .Include(p => p.Tickets)
                                                 .ThenInclude(t => t.TicketStatus)
                                             .Include(p => p.Tickets)
                                                 .ThenInclude(t => t.TicketPriority)
@@ -46,14 +57,32 @@ namespace TheBugTracker.Services
             return result;
         }
 
-        public Task<List<Ticket>> GetAllTicketsAsync(int companyId)
+        public async Task<List<Ticket>> GetAllTicketsAsync(int companyId)
         {
-            throw new System.NotImplementedException();
+            List<Ticket> result = new();
+            List<Project> projects = new(); //Req b/c ticket table does not have companyId property
+
+            projects = await GetAllProjectsAsync(companyId); //using class method
+
+            result = projects.SelectMany(p => p.Tickets).ToList(); //SelectMany to flatten project ticket IEnumerables
+
+            return result;
+
         }
 
-        public Task<Company> GetCompanyInfoByIdAsync(int? companyId)
+        public async Task<Company> GetCompanyInfoByIdAsync(int? companyId)
         {
-            throw new System.NotImplementedException();
+            Company result = new();
+
+            if (companyId != null)
+            {
+                result = await _context.Companies
+                                        .Include(c => c.Members)
+                                        .Include(c => c.Projects)
+                                        .Include(c => c.Invites)
+                                        .FirstOrDefaultAsync(c => c.Id == companyId);
+            }
+            return result;
         }
     }
 }
