@@ -107,17 +107,41 @@ namespace TheBugTracker.Services
 
         public async Task<int?> LookupTicketPriorityIdAsync(string priorityName)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                TicketPriority priority = await _context.TicketPriorities.FirstOrDefaultAsync(p => p.Name == priorityName);
+                return priority?.Id;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task<int?> LookupTicketStatusIdAsync(string statusName)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                TicketStatus status = await _context.TicketStatuses.FirstOrDefaultAsync(s => s.Name == statusName);
+                return status?.Id;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task<int?> LookupTicketTypeIdAsync(string typeName)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                TicketType type = await _context.TicketTypes.FirstOrDefaultAsync(t => t.Name == typeName);
+                return type?.Id;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task UpdateTicketAsync(Ticket ticket)
