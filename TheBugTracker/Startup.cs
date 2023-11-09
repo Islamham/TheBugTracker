@@ -49,9 +49,10 @@ namespace TheBugTracker
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
 
-            //Registering services (necessary for dependency injections)
+            //Registering Custom Services (necessary for dependency injections)
             services.AddScoped<IBTRolesService, BTRolesService>();
             services.AddScoped<IBTCompanyInfoService, BTCompanyInfoService>();
+            services.AddScoped<IBTProjectService, BTProjectService>();
 
             services.AddControllersWithViews();
         }
