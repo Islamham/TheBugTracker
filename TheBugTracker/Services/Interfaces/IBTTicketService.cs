@@ -31,3 +31,4 @@ namespace TheBugTracker.Services.Interfaces
         public Task<int?> LookupTicketStatusIdAsync(string statusName);
         public Task<int?> LookupTicketTypeIdAsync(string typeName);
     }
+}
