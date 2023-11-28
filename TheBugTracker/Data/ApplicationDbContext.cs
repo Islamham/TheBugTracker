@@ -22,7 +22,7 @@ namespace TheBugTracker.Data
 
         public  DbSet<Ticket> Tickets { get; set; }
 
-        public DbSet<Notification> Notifcations { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public DbSet<ProjectPriority> ProjectPriorities { get; set; }   
 
