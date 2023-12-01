@@ -45,12 +45,28 @@ namespace TheBugTracker.Services
 
         public string FormatFileSize(long bytes)
         {
-            throw new System.NotImplementedException();
+            int counter = 0;
+            decimal fileSize = bytes;
+            while (Math.Round(fileSize / 1024) >= 1)
+            {
+                fileSize /= 1024;
+                counter++;
+            }
+            return string.Format("{0:n1}{1}", fileSize, suffixes[counter]); //n1 for one decimal place
         }
 
         public string GetFileIcon(string file)
         {
-            throw new System.NotImplementedException();
+            string fileImage = "default";
+
+            if (!string.IsNullOrWhiteSpace(file))
+            {
+                fileImage = Path.GetExtension(file).Replace(".", ""); //because "." is returned by GetExtension
+                return $"/img/png{fileImage}.png";
+            }
+            return fileImage;
+            
+
         }
     }
 }
