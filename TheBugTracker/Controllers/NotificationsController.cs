@@ -22,7 +22,7 @@ namespace TheBugTracker.Controllers
         // GET: Notifications
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Notifcations.Include(n => n.Recipient).Include(n => n.Sender).Include(n => n.Ticket);
+            var applicationDbContext = _context.Notifications.Include(n => n.Recipient).Include(n => n.Sender).Include(n => n.Ticket);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace TheBugTracker.Controllers
                 return NotFound();
             }
 
-            var notification = await _context.Notifcations
+            var notification = await _context.Notifications
                 .Include(n => n.Recipient)
                 .Include(n => n.Sender)
                 .Include(n => n.Ticket)
@@ -83,7 +83,7 @@ namespace TheBugTracker.Controllers
                 return NotFound();
             }
 
-            var notification = await _context.Notifcations.FindAsync(id);
+            var notification = await _context.Notifications.FindAsync(id);
             if (notification == null)
             {
                 return NotFound();
@@ -140,7 +140,7 @@ namespace TheBugTracker.Controllers
                 return NotFound();
             }
 
-            var notification = await _context.Notifcations
+            var notification = await _context.Notifications
                 .Include(n => n.Recipient)
                 .Include(n => n.Sender)
                 .Include(n => n.Ticket)
@@ -158,15 +158,15 @@ namespace TheBugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var notification = await _context.Notifcations.FindAsync(id);
-            _context.Notifcations.Remove(notification);
+            var notification = await _context.Notifications.FindAsync(id);
+            _context.Notifications.Remove(notification);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool NotificationExists(int id)
         {
-            return _context.Notifcations.Any(e => e.Id == id);
+            return _context.Notifications.Any(e => e.Id == id);
         }
     }
 }
