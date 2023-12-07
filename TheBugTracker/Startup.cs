@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using TheBugTracker.Data;
 using TheBugTracker.Models;
 using TheBugTracker.Services;
+using TheBugTracker.Services.Factories;
 using TheBugTracker.Services.Interfaces;
 
 namespace TheBugTracker
@@ -32,7 +33,8 @@ namespace TheBugTracker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(DataUtility.GetConnectionString(Configuration)));
+                options.UseNpgsql(DataUtility.GetConnectionString(Configuration),
+                o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -47,7 +49,9 @@ namespace TheBugTracker
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 //Following two lines added:
                 .AddDefaultUI()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                //Following principle factory added
+                .AddClaimsPrincipalFactory<BTUserClaimsPrincipalFactory>();
 
             //Registering Custom Services (necessary for dependency injections)
             services.AddScoped<IBTRolesService, BTRolesService>();
