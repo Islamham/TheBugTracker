@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +23,21 @@ namespace TheBugTracker.Services
             _context = context;
             _roleManager = roleManager;
             _userManager = userManager;
+        }
+
+        public async Task<List<IdentityRole>> GetRolesAsync()
+        {
+            try
+            {
+                List<IdentityRole> result = new();
+
+                result = await _context.Roles.ToListAsync();
+
+                return result;
+            } catch(Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<bool> AddUserToRoleAsync(BTUser user, string roleName)
