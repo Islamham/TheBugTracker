@@ -5,7 +5,7 @@ namespace TheBugTracker.Models.ViewModels
 {
     public class ManageUserRolesViewModel
     {
-        public BTUser BTuser { get; set; }
+        public BTUser BTUser { get; set; }
 
         public MultiSelectList Roles { get; set; }
 

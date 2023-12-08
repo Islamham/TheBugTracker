@@ -42,7 +42,7 @@ namespace TheBugTracker.Controllers
             foreach (BTUser user in users)
             {
                 ManageUserRolesViewModel viewModel = new();
-                viewModel.BTuser = user;
+                viewModel.BTUser = user;
                 IEnumerable<string> selected = await _rolesService.GetUserRolesAsync(user);
                 viewModel.Roles = new MultiSelectList(await _rolesService.GetRolesAsync(), "Name", "Name", selected);
 
