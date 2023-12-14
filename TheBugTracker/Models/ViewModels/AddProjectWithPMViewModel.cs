@@ -12,7 +12,7 @@ namespace TheBugTracker.Models.ViewModels
 
         public SelectList PriorityList { get; set; }
 
-        public int ProjectPriority { get; set; }'
+        public int ProjectPriority { get; set; }
         
     }
 }
